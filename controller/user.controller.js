@@ -38,6 +38,14 @@ userController.createUser = async(req, res) => {
 userController.loginWithEmail = async(req, res) => {
     try {
         const {email, password} = req.body;
+
+        if(!email){
+            throw new Error('이메일을 입력해주세요! 💦');
+        }
+        if(!password){
+            throw new Error('비밀번호를 입력해주세요! 💦')
+        }
+
         const user = await User.findOne({email}, '-createdAt -updatedAt -__v');
 
         if(user){
